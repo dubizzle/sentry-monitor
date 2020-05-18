@@ -34,17 +34,8 @@ function checkForIssue(sentryId,JIRA_AUTH) {
 
 const jiraIssueCheck = async function (data,JIRA_AUTH) {
   try{
-    if(JIRA_AUTH == undefined)
-    {
-      throw new Error('JIRA CREDENTIALS MISSING')
-    }
-    if(data == undefined){
-      throw new Error('DATA MISSING')
-    }
     let response = await checkForIssue(data.sentryId,JIRA_AUTH)
-    console.log('JIRA CHECK RESPONSE, ----------------------------------------------------------------------')
-    console.log(response)
-    console.log('---------------------------------------------------------------------')
+    console.log('SEARCH STATUS',response.status)
     let body = await response.json()
     return body.issues
   }catch(err){
