@@ -24,7 +24,7 @@ const sentryRunner = async (project, SENTRY_AUTH) => {
     try {
         let res = await getIssues(project,SENTRY_AUTH)
         let data = await res.json()
-        console.log('RESPONSE STATUS:', res.status)
+        console.log('SENTRY RESPONSE STATUS:', res.status)
         return data
     } catch (err) {
         console.log('------------------Caught exception during sentry api call------------------')
