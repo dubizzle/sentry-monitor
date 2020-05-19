@@ -13,10 +13,10 @@ function dataformatter ({id,title,permalink,userCount,project,metadata}){
     jiraData.log = JSON.stringify(metadata)
     jiraData.link = permalink
 
-    if(jiraData.count<=500){
+    if(jiraData.count<=200){
         jiraData.priority="Average"
     }
-    else if (jiraData.count<=800){
+    else if (jiraData.count<=500){
         jiraData.priority="High"
     }
     else if (jiraData.count<=1000){
