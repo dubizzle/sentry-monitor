@@ -7,7 +7,7 @@ const jiraReporter = async function (metadata){
         for (_project of metadata.projects){
             const data = await sentryRunner(_project.project,metadata.SENTRY_AUTH)
             console.log(`For ${_project.project}, ${data.length} issues found`)
-            jiraHandler(data,metadata.JIRA_AUTH)
+            jiraHandler(data,metadata.JIRA_AUTH,_project.project)
         }
         
     } catch (err) {

@@ -35,7 +35,6 @@ function checkForIssue(sentryId,JIRA_AUTH) {
 const jiraIssueCheck = async function (data,JIRA_AUTH) {
   try{
     let response = await checkForIssue(data.sentryId,JIRA_AUTH)
-    console.log('SEARCH STATUS',response.status)
     let body = await response.json()
     return body.issues
   }catch(err){

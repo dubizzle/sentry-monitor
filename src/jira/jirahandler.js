@@ -28,7 +28,7 @@ function dataformatter ({id,title,permalink,userCount,project,metadata}){
     return jiraData
 }
 
-const jiraHandler = async (sentryData,JIRA_AUTH) => {
+const jiraHandler = async (sentryData,JIRA_AUTH,sentryProject) => {
     try{
         for (element of sentryData){
             let jiraData = dataformatter(element)
@@ -37,17 +37,14 @@ const jiraHandler = async (sentryData,JIRA_AUTH) => {
                 let response = await getIssue(issuesFound[0].key,JIRA_AUTH) 
                 let updateData = await response.json()
                 let updateResponse = await issueUpdate(updateData,jiraData,JIRA_AUTH)
-                console.log('UPDATE STATUS:',updateResponse.status)
-                if(updateResponse.status==400)
+                if(updateResponse.status!=204)
                 {
                     throw new Error(`Error updating an issue:${response}`)
                 }
             } 
             else if(issuesFound.length == 0) {
                 let response = await createIssue(jiraData,JIRA_AUTH)
-
-                console.log('CREATE STATUS:',response.status)
-                if(response.status==400)
+                if(response.status!=201)
                 {
                     throw new Error(`Error creating an issue:${response}`)
                 }
@@ -59,6 +56,8 @@ const jiraHandler = async (sentryData,JIRA_AUTH) => {
         }
     } catch (err) {
         console.log(err)
+    } finally {
+        console.log(`For Sentry project:${sentryProject}, jira stage done`)
     }
     
 }
