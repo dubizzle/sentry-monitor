@@ -9,7 +9,6 @@ const jiraReporter = async function (metadata){
             console.log(`For ${_project.project}, ${data.length} issues found`)
             jiraHandler(data,metadata.JIRA_AUTH,_project.project)
         }
-        
     } catch (err) {
         console.log('This error is originated from the jiraReporter')
         console.log (err)
